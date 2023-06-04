@@ -104,7 +104,7 @@ const SignUp = ({ open, setOpen }) => {
                     {isRegister ? "Create Account" : "Account Sign In"}
                   </Dialog.Title>
 
-                  <div className='w-full flex items-center justify-center px-2 py-4 '>
+                  <div className='w-full flex items-center justify-center px-2 py-4 gap-3'>
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType === "seeker"

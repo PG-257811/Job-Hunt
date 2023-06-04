@@ -78,8 +78,8 @@ const UploadJob = () => {
   }, []);
 
   return (
-    <div className="container mx-auto flex flex-col md:flex-row gap-8 2xl:gap-14 bg-[#f7fdfd] px-5">
-      <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
+    <div className="container mx-auto flex flex-col md:flex-row gap-8 2xl:gap-14 bg-white px-5 py-10">
+      <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10  border-gray-300 border-2 rounded-lg">
         <div>
           <p className="text-gray-500 font-semibold text-2xl">Job Post</p>
 
@@ -108,8 +108,8 @@ const UploadJob = () => {
               <div className="w-1/2">
                 <TextInput
                   name="salary"
-                  label="Salary (USD)"
-                  placeholder="eg. 1500"
+                  label="Salary (INR)"
+                  placeholder="eg. 50,000"
                   type="number"
                   register={register("salary", {
                     required: "Salary is required",

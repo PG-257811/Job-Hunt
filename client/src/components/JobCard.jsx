@@ -6,8 +6,8 @@ const JobCard = ({ job }) => {
   return (
     <Link to={`/job-detail/${job?._id}`}>
       <div
-        className='w-full md:w-[16rem] 2xl:w-[18rem] h-[16rem] md:h-[18rem] bg-white flex flex-col justify-between shadow-lg 
-                rounded-md px-3 py-5 '
+        className='w-full md:w-[20rem] 2xl:w-[20rem] h-[18rem] md:h-[18rem] bg-white flex flex-col justify-between shadow-lg 
+                rounded-md px-3 py-5 overflow-hidden hover:bg-[#EDEFEF] hover:scale-105 ease-in-out duration-300'
       >
 
         <div className="w-full h-full flex flex-col justify-between">
