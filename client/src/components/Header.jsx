@@ -42,7 +42,7 @@ const Header = ({
 }) => {
   return (
     <div>
-      <div className="bg-[#D6DEDD] px-5">
+      <div className="bg-[#D7DEDC] px-5">
         <div
           className={`container mx-auto ${
             type ? "h-[250px]" : "h-[250px]"

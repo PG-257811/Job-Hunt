@@ -23,7 +23,7 @@ function MenuList({ user, onClick }) {
     <div>
       <Menu as='div' className='inline-block text-left'>
         <div className='flex'>
-          <Menu.Button className='inline-flex gap-2 w-full rounded-md bg-[#D6DEDD] md:px-4 py-2 text-sm font-medium text-slate-700 hover:bg-opacity-20 '>
+          <Menu.Button className='inline-flex gap-2 w-full rounded-md bg-[#D7DEDC] md:px-4 py-2 text-sm font-medium text-slate-700 hover:bg-opacity-20 '>
             <div className='leading[80px] flex flex-col items-start'>
               <p className='text-sm font-semibold '>
                 {user?.firstName ?? user?.name}
@@ -113,7 +113,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className='relative bg-[#D6DEDD] z-50 px-8'>
+      <div className='relative bg-[#D7DEDC] z-50 px-8'>
         <nav className='container mx-auto flex items-center justify-between p-5'>
           <div>
             <Link to='/' className='text-[#2624D2] font-bold text-2xl'>
