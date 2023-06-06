@@ -49,7 +49,14 @@ const Companies = () => {
 
     await fetchCompanies();
   };
-  const handleShowMore = () => {};
+
+  const handleShowMore = (increment) => {
+    if (page + increment > 0 && page + increment <= numPage) {
+      setPage((prevPage) => prevPage + increment);
+      setIsFetching(true); // Assuming you're using this state to manage fetching
+      // Perform your data fetching here
+    }
+  };
 
   useEffect(() => {
     fetchCompanies();
@@ -68,9 +75,9 @@ const Companies = () => {
       />
 
       <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 px-8 py-6">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 px-8">
           <p className="text-sm md:text-base">
-            Showing: <span className="font-semibold">{recordsCount}</span> Companies
+            <span className="font-semibold">{recordsCount}</span> Companies
             Available
           </p>
 
@@ -86,26 +93,40 @@ const Companies = () => {
             <CompanyCard cmp={cmp} key={index} />
           ))}
 
+          <p className="text-sm text-right font-semibold">
+            {data?.length} records out of {recordsCount}
+          </p>
+          
           {isFetching && (
             <div className="mt-10">
               <Loading />
             </div>
           )}
 
-          <p className="text-sm text-right">
-            {data?.length} records out of {recordsCount}
-          </p>
         </div>
 
-        {numPage > page && !isFetching && (
-          <div className="w-full flex items-center justify-center pt-16">
-            <CustomButton
-              onClick={handleShowMore}
-              title="Load More"
-              containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
-            />
-          </div>
+        {/* Pagination */}
+        <div className="w-full flex items-center justify-center gap-8">
+        {page > 1 && !isFetching && (
+          <button
+            onClick={() => handleShowMore(-1)}
+            className="text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600"
+          >
+            Previous
+          </button>
         )}
+
+        {numPage > page && !isFetching && (
+          <button
+            onClick={() => handleShowMore(1)}
+            className="text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600"
+          >
+            Next
+          </button>
+        )}
+      </div>
+
+
       </div>
     </div>
   );
