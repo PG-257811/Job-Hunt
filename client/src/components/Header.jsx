@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineSearch, AiOutlineCloseCircle } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import CustomButton from "./CustomButton";
-import { popularSearch } from "../utils/data";
+import { popularSearchJobs, popularSearchCompanies } from "../utils/data";
 
 const SearchInput = ({ placeholder, icon, value, setValue, styles }) => {
   const handleChange = (e) => {
@@ -54,7 +54,7 @@ const Header = ({
 
           <div className='w-full flex items-center justify-around bg-white px-2 md:px-5 py-2.5 md:py-6 shadow-2xl rounded-full'>
             <SearchInput
-              placeholder='Job Title or Keywords'
+              placeholder= {type === "home" ? 'Job Title or Keywords' : 'Company Title or Keywords'}
               icon={<AiOutlineSearch className='text-gray-600 text-xl' />}
               value={searchQuery}
               setValue={setSearchQuery}
@@ -78,9 +78,22 @@ const Header = ({
             </div>
           </div>
 
-          {type && (
+          {type==="home" && (
             <div className='w-full lg:1/2 flex flex-wrap gap-3 md:gap-6 px-3 py-10 md:py-14'>
-              {popularSearch.map((search, index) => (
+              {popularSearchJobs.map((search, index) => (
+                <span
+                  key={index}
+                  className='bg-[#1d4fd826] text-[#1d4ed8] py-1 px-2 rounded-full text-sm md:text-base'
+                >
+                  {search}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          {type==="company" && (
+            <div className='w-full lg:1/2 flex flex-wrap gap-3 md:gap-6 px-3 py-10 md:py-14'>
+              {popularSearchCompanies.map((search, index) => (
                 <span
                   key={index}
                   className='bg-[#1d4fd826] text-[#1d4ed8] py-1 px-2 rounded-full text-sm md:text-base'

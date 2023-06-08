@@ -18,7 +18,7 @@ export const experience = [
   { title: "Over 6 Years", value: "6-20" },
 ];
 
-export const popularSearch = [
+export const popularSearchJobs = [
   "Software Engineer",
   "Developer",
   "Full-Stack Developer",
@@ -27,6 +27,18 @@ export const popularSearch = [
   "Full-Time",
   "Sales",
   "Office Assistant",
+];
+
+
+export const popularSearchCompanies = [
+  "Google",
+  "Amazon",
+  "Microsoft",
+  "Facebook",
+  "Apple",
+  "Instagram",
+  "Linkedin",
+  "Spotify",
 ];
 
 export const jobs = [

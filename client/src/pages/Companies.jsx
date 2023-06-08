@@ -64,6 +64,7 @@ const Companies = () => {
         setSearchQuery={setSearchQuery}
         location={cmpLocation}
         setLocation={setCmpLocation}
+        type='company'
       />
 
       <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 md:px-5 py-6 bg-[#f7fdfd]">
