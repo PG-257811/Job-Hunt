@@ -9,6 +9,7 @@ import CustomButton from "./CustomButton";
 import { users } from "../utils/data";
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../redux/userSlice";
+import { NoProfile } from "../assets";
 
 function MenuList({ user, onClick }) {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function MenuList({ user, onClick }) {
             </div>
 
             <img
-              src={user?.profileUrl}
+              src={user?.profileUrl || NoProfile}
               alt='user profile'
               className='w-10 h-10 rounded-full object-cover '
             />
