@@ -122,7 +122,7 @@ const JobDetail = () => {
               <div className="bg-[#fed0ab] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
                 <span className="text-sm">No. of Applicants</span>
                 <p className="text-lg font-semibold text-gray-700">
-                  {job?.applicants?.length}K
+                  {job?.application?.length}
                 </p>
               </div>
 
@@ -130,6 +130,13 @@ const JobDetail = () => {
                 <span className="text-sm">No. of Vacancies</span>
                 <p className="text-lg font-semibold text-gray-700">
                   {job?.vacancies}
+                </p>
+              </div>
+
+              <div className="bg-[#ffcddf] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
+                <span className="text-sm">Yr. of Experience</span>
+                <p className="text-lg font-semibold text-gray-700">
+                  {job?.experience}
                 </p>
               </div>
             </div>

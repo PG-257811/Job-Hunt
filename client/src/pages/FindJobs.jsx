@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BiBriefcaseAlt2 } from "react-icons/bi";
 import { BsStars } from "react-icons/bs";
@@ -6,7 +6,8 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 import Header from "../components/Header";
 import { experience, jobTypes, jobs } from "../utils/data";
-import { CustomButton, JobCard, ListBox } from "../components";
+import { CustomButton, JobCard, ListBox, Loading } from "../components";
+import { apiRequest, updateURL } from "../utils";
 
 const FindJobs = () => {
   const [sort, setSort] = useState("Newest");
@@ -19,11 +20,43 @@ const FindJobs = () => {
   const [jobLocation, setJobLocation] = useState("");
   const [filterJobTypes, setFilterJobTypes] = useState([]);
   const [filterExp, setFilterExp] = useState([]);
+  const [expVal, setExpVal] = useState([]);
 
   const [isFetching, setIsFetching] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const fetchJobs = async () => {
+    setIsFetching(true);
+
+    const newURL = updateURL({
+      pageNum: page,
+      query: searchQuery,
+      cmpLoc: jobLocation,
+      sort: sort,
+      navigate: navigate,
+      location: location,
+      jType: filterJobTypes,
+      exp: filterExp,
+    });
+
+    try {
+      const res = await apiRequest({
+        url: "/jobs" + newURL,
+        method: "GET",
+      });
+
+      setNumPage(res?.numOfPage);
+      setRecordCount(res?.totalJobs);
+      setData(res?.data);
+
+      setIsFetching(false);
+
+    } catch (error) {
+
+    }
+  }
 
   const filterJobs = (val) => {
     if (filterJobTypes?.includes(val)) {
@@ -32,17 +65,50 @@ const FindJobs = () => {
       setFilterJobTypes([...filterJobTypes, val]);
     }
   };
-
+  
   const filterExperience = async (e) => {
-    setFilterExp(e);
+    if (expVal?.includes(e)) {
+      setExpVal(expVal?.filter((el) => el != e));
+    } else {
+      setExpVal([...expVal, e]);
+    }
   };
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    await fetchJobs();
+  }
+
+  const handleShowMore = async (e) => {
+    e.preventDefault();
+    setPage((prev) => prev+1);
+  };
+
+  useEffect(() => {
+    if(expVal.length > 0) {
+      let newExpVal = [];
+
+      expVal?.map((el) => {
+        const newEl = el?.split("-");
+        newExpVal.push(Number(newEl[0]), Number(newEl[1]))
+      });
+
+      newExpVal?.sort((a, b) => a - b);
+      
+      setFilterExp(`${newExpVal[0]}-${newExpVal[newExpVal?.length - 1]}`)
+    }
+  }, [expVal]);
+
+  useEffect(() => {
+    fetchJobs();
+  }, [sort, filterJobTypes, filterExp, page]);
 
   return (
     <div>
       <Header
         title='With Ease, Find the Job of Your Dreams !!'
         type='home'
-        handleClick={() => {}}
+        handleClick={handleSearchSubmit}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         location={jobLocation}
@@ -111,7 +177,7 @@ const FindJobs = () => {
         <div className='w-full md:w-5/6 px-5 md:px-0'>
           <div className='flex items-center justify-between mb-4'>
             <p className='text-sm md:text-base'>
-              Showing: <span className='font-semibold'>1,902</span> Jobs
+              Showing: <span className='font-semibold'>{recordCount}</span> Jobs
               Available
             </p>
 
@@ -123,14 +189,27 @@ const FindJobs = () => {
           </div>
 
           <div className='w-full flex flex-wrap gap-4'>
-            {jobs.map((job, index) => (
-              <JobCard job={job} key={index} />
-            ))}
+            {data?.map((job, index) => {
+              const newJob = {
+                name: job?.company?.name,
+                logo: job?.company?.profileUrl,
+                ...job,
+              };
+              return(
+              <JobCard job={newJob} key={index} />
+            )})}
           </div>
+          
+          {isFetching && (
+            <div className="py-10">
+              <Loading/>
+            </div>
+          )}
 
           {numPage > page && !isFetching && (
             <div className='w-full flex items-center justify-center pt-16'>
               <CustomButton
+                onClick={handleShowMore}
                 title='Load More'
                 containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
               />
