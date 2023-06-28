@@ -13,7 +13,7 @@ const SignUp = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegister, setIsRegister] = useState(true);
   const [accountType, setAccountType] = useState("seeker");
 
   const [errMsg, setErrMsg] = useState("");
