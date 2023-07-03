@@ -44,7 +44,11 @@ const Companies = () => {
     }
   };
 
-  const handleSearchSubmit = () => {};
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault()
+
+    await fetchCompanies();
+  };
   const handleShowMore = () => {};
 
   useEffect(() => {
@@ -59,7 +63,7 @@ const Companies = () => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         location={cmpLocation}
-        setLocation={setSearchQuery}
+        setLocation={setCmpLocation}
       />
 
       <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 md:px-5 py-6 bg-[#f7fdfd]">
