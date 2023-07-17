@@ -7,12 +7,13 @@ import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
 import { apiRequest } from "../utils";
 import { Login } from "../redux/userSlice";
+import { FaHourglassEnd } from "react-icons/fa";
 
 const SignUp = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const [isRegister, setIsRegister] = useState(true);
+  const [isRegister, setIsRegister] = useState(false);
   const [accountType, setAccountType] = useState("seeker");
 
   const [errMsg, setErrMsg] = useState("");
