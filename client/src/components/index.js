@@ -6,5 +6,6 @@ import SignUp from "./SignUp";
 import Header from "./Header";
 import ListBox from "./ListBox";
 import JobCard from "./JobCard";
+import CompanyCard from "./CompanyCard";
 
-export { Navbar, Footer, CustomButton, TextInput, SignUp, Header, JobCard, ListBox };
+export { Navbar, Footer, CustomButton, TextInput, SignUp, Header, JobCard, ListBox, CompanyCard };
