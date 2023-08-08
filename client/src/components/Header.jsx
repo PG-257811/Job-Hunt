@@ -49,8 +49,8 @@ const Header = ({
         } flex items-center relative`}
       >
         <div className='w-full z-10'>
-          <div className='mb-8'>
-            <p className='text-slate-700 font-bold text-4xl'>{title}</p>
+          <div className='mb-8 px-8'>
+            <p className='text-sky-600 font-bold text-4xl'>{title}</p>
           </div>
 
           <div className='w-full flex items-center justify-around bg-white px-2 md:px-5 py-2.5 md:py-6 shadow-2xl rounded-full'>
@@ -80,7 +80,7 @@ const Header = ({
           </div>
 
           {type && (
-            <div className='w-full lg:1/2 flex flex-wrap gap-3 md:gap-6 py-10 md:py-14'>
+            <div className='w-full lg:1/2 flex flex-wrap gap-3 md:gap-6 px-3 py-10 md:py-14'>
               {popularSearch.map((search, index) => (
                 <span
                   key={index}
@@ -93,9 +93,9 @@ const Header = ({
           )}
         </div>
 
-        <div className='w-1/3 h-full absolute top-24 md:-top-6 lg:-top-14 right-16 2xl:right-[18rem]'>
+        {/* <div className='w-1/3 h-full absolute top-24 md:-top-6 lg:-top-14 right-16 2xl:right-[18rem]'>
           <img src={HeroImage} className='object-contain' />
-        </div>
+        </div> */}
       </div>
     </div>
   );
