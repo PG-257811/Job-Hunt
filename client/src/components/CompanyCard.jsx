@@ -9,7 +9,7 @@ const CompanyCard = ({ cmp }) => {
           <img
             src={cmp?.profileUrl}
             alt={cmp?.name}
-            className='w-8 md:w-12 h-8 md:h-12 rounded'
+            className='w-8 md:w-16 h-8 md:h-12 rounded md:px-2'
           />
         </Link>
         <div className='h-full flex flex-col'>
@@ -27,7 +27,7 @@ const CompanyCard = ({ cmp }) => {
         <p className='text-base text-start'>{cmp?.location}</p>
       </div>
 
-      <div className='w-1/4 h-full flex flex-col items-center'>
+      <div className='w-1/4 h-full flex flex-col items-center md:py-3'>
         <p className='text-blue-600 font-semibold'>{cmp?.jobPosts?.length}</p>
         <span className='text-xs md:base font-normal text-gray-600'>
           Jobs Posted

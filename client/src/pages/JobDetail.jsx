@@ -107,7 +107,7 @@ const JobDetail = () => {
           <div className='my-6'>
             {selected === "0" ? (
               <>
-                <p className='text-xl font-semibold'>Job Decsription</p>
+                <p className='text-xl font-semibold'>Job Description</p>
 
                 <span className='text-base'>{job?.detail[0]?.desc}</span>
 
