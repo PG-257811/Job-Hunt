@@ -9,7 +9,7 @@ const CustomButton = ({ title, containerStyles, iconRight, type, onClick }) => {
     >
       {title}
 
-      {iconRight && <div className="ml-2">{iconRight}</div>}
+      {iconRight && <div className='ml-2'>{iconRight}</div>}
     </button>
   );
 };

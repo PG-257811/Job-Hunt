@@ -96,21 +96,21 @@ function MenuList({ user, onClick }) {
     </div>
   );
 }
-
 const Navbar = () => {
-  const user = users[1];
+  const user = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseNavbar = () => {
     setIsOpen((prev) => !prev);
   };
+
   return (
     <>
-      <div className="relative bg-[#f7fdfd] z-50">
-        <nav className="container mx-auto flex items-center justify-between p-5">
-        <div>
+      <div className='relative bg-[#f7fdfd] z-50'>
+        <nav className='container mx-auto flex items-center justify-between p-5'>
+          <div>
             <Link to='/' className='text-blue-600 font-bold text-xl'>
-              Job<span className='text-[#1677cccb]'>Hunt</span>
+              Job<span className='text-[#1677cccb]'>Finder</span>
             </Link>
           </div>
 
@@ -151,8 +151,6 @@ const Navbar = () => {
             {isOpen ? <AiOutlineClose size={26} /> : <HiMenuAlt3 size={26} />}
           </button>
         </nav>
-
-
 
         {/* MOBILE MENU */}
         <div

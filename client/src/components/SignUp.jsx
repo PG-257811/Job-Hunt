@@ -23,7 +23,6 @@ const SignUp = ({ open, setOpen }) => {
   } = useForm({
     mode: "onChange",
   });
-  
   let from = location.state?.from?.pathname || "/";
 
   const closeModal = () => setOpen(false);
