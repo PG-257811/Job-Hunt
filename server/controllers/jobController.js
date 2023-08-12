@@ -248,7 +248,23 @@ export const deleteJobPost = async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    // Find the job post to determine the company it belongs to
+    const job = await Jobs.findById(id);
+
+    if (!job) {
+      return res.status(404).json({ message: "Job Post not found." });
+    }
+
+    // Delete the job post from the general jobs list
     await Jobs.findByIdAndDelete(id);
+
+    // Delete the job post from the company's jobPosts list
+    const company = await Companies.findById(job.company);
+    
+    if (company) {
+      company.jobPosts.pull(id); // Assuming jobPosts is an array of job IDs
+      await company.save();
+    }
 
     res.status(200).send({
       success: true,
