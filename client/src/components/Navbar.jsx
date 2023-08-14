@@ -123,16 +123,16 @@ const Navbar = () => {
 
           <ul className='hidden lg:flex gap-10 text-[#7B7E7F] font-semibold'>
             <li>
-              <Link to='/' className="hover:text-black">Find Job</Link>
+              <Link to='/' className="font-bold hover:text-black">Find Job</Link>
             </li>
             <li>
-              <Link to='/companies' className="hover:text-black">Companies</Link>
+              <Link to='/companies' className="font-bold hover:text-black">Companies</Link>
             </li>
             <li>
-              <Link to={user?.accountType === "seeker" ? "/applications" : '/upload-job'} className="hover:text-black">{user?.accountType === "seeker" ? "Applications" : "Upload Job"}</Link>
+              <Link to={user?.accountType === "seeker" ? "/applications" : '/upload-job'} className="font-bold hover:text-black">{user?.accountType === "seeker" ? "Applications" : "Upload Job"}</Link>
             </li>
             <li>
-              <Link to='/about-us' className="hover:text-black">About</Link>
+              <Link to='/about-us' className="font-bold hover:text-black">About</Link>
             </li>
           </ul>
 
