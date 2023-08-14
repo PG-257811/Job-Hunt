@@ -67,7 +67,7 @@ const Companies = () => {
         type='company'
       />
 
-      <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 md:px-5 py-6 bg-[#f7fdfd]">
+      <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 px-8 py-6">
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm md:text-base">
             Showing: <span className="font-semibold">{recordsCount}</span> Companies
@@ -81,7 +81,7 @@ const Companies = () => {
           </div>
         </div>
 
-        <div className="w-full flex flex-col gap-6">
+        <div className="w-full flex flex-col gap-6 px-8">
           {data?.map((cmp, index) => (
             <CompanyCard cmp={cmp} key={index} />
           ))}

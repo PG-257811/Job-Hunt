@@ -106,7 +106,7 @@ const FindJobs = () => {
   return (
     <div>
       <Header
-        title='With Ease, Find the Job of Your Dreams !!'
+        title='With Ease, Find the Job of Your Dreams'
         type='home'
         handleClick={handleSearchSubmit}
         searchQuery={searchQuery}
@@ -115,8 +115,8 @@ const FindJobs = () => {
         setLocation={setJobLocation}
       />
 
-      <div className='container mx-auto flex gap-6 2xl:gap-10 md:px-5 py-0 md:py-6 bg-[#f7fdfd]'>
-        <div className='hidden md:flex flex-col w-1/6 h-fit bg-white shadow-sm px-3 py-2'>
+      <div className='container mx-auto flex gap-6 2xl:gap-10 md:px-5 py-0 md:py-6 bg-white'>
+        <div className='hidden md:flex flex-col w-1/6 h-fit bg-white px-3 py-2  border-r-2 border-gray-300'>
           <p className='text-lg font-semibold text-slate-600'>Filter Search</p>
 
           <div className='py-2'>

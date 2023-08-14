@@ -1,7 +1,5 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
-import { footerLinks } from "../utils/data";
-import { Link } from "react-router-dom";
 import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
 
@@ -25,28 +23,7 @@ const Footer = () => {
       </div>
 
       <div className='bg-[#1d4ed8] '>
-        <div className='container px-5 py-20 mx-auto '>
-          <div className='w-full flex flex-wrap gap-10 justify-between -mb-10 -px-4'>
-            {footerLinks.map(({ id, title, links }) => (
-              <div className='w-auto px-4 ' key={id + title}>
-                <h2 className='font-medium text-white tracking-widest text-sm mb-3'>
-                  {title}
-                </h2>
-
-                <div className='mb-10 flex flex-col gap-3 '>
-                  {links.map((link, index) => (
-                    <Link
-                      key={link + index}
-                      to='/'
-                      className='text-gray-300 text-sm hover:text-white '
-                    >
-                      {link}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className='container px-5 py-1 mx-auto '>
         </div>
 
         <div className=''>
@@ -57,7 +34,7 @@ const Footer = () => {
           <div className='container mx-auto px-5 pt-6 pb-8 flex flex-wrap items-center justify-between '>
             <div className='w-full md:w-2/4 lg:w-1/3 h-16 flex items-center justify-center md:justify-start '>
               <TextInput
-                styles='w-full flex-grow md:w-40 2xl:w-64 bg-gray-100 sm:mr-4 md-2'
+                styles='w-full flex-grow md:w-40 2xl:w-64 bg-gray-100 sm:mr-4 md-2 text-black'
                 type='email'
                 placeholder='Email Address'
               />
