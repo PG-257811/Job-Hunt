@@ -8,6 +8,7 @@ import CustomButton from "./CustomButton";
 import { apiRequest } from "../utils";
 import { Login } from "../redux/userSlice";
 import { FaHourglassEnd } from "react-icons/fa";
+import Loading from "./Loading";
 
 const SignUp = ({ open, setOpen }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const SignUp = ({ open, setOpen }) => {
 
   const [isRegister, setIsRegister] = useState(true);
   const [accountType, setAccountType] = useState("seeker");
+  const [isFetching, setIsFetching] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
   const {
@@ -47,12 +49,16 @@ const SignUp = ({ open, setOpen }) => {
       }
     }
 
+    setIsFetching(true);
+
     try{
       const res = await apiRequest({
         url: URL,
         data: data,
         method: "POST",
       });
+
+      setIsFetching(false);
 
       if(res?.status === "failed") {
         setErrMsg(res?.message);
@@ -65,7 +71,8 @@ const SignUp = ({ open, setOpen }) => {
       }
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      setIsFetching(false);
     }
   };
 
@@ -262,8 +269,15 @@ const SignUp = ({ open, setOpen }) => {
                         title={isRegister ? "Create Account" : "Login Account"}
                       />
                     </div>
-                  </form>
 
+                    {isFetching && (
+                      <div className="py-2">
+                        <Loading/>
+                      </div>
+                    )}
+
+                  </form>
+                  
                   <div className='mt-4'>
                     <p className='text-sm text-gray-700'>
                       {isRegister

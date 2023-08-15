@@ -70,16 +70,19 @@ const JobDetail = () => {
     <div className="container mx-auto">
       <div className="w-full flex flex-col md:flex-row gap-10">
         {/* LEFT SIDE */}
+        
         {isFetching ? (
-          <Loading />
+          <div className="mx-auto py-8">
+            <Loading/>
+          </div>
         ) : (
-          <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
+          <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white mt-6 ml-6 px-5 py-10 md:px-10 shadow-md  border-gray-300 border rounded-lg">
             <div className="w-full flex items-center justify-between">
               <div className="w-3/4 flex gap-2">
                 <img
                   src={job?.company?.profileUrl}
                   alt={job?.company?.name}
-                  className="w-20 h-20 md:w-24 md:h-20 rounded"
+                  className="w-20 h-20 md:w-20 md:h-20 rounded"
                 />
 
                 <div className="flex flex-col">
@@ -133,7 +136,7 @@ const JobDetail = () => {
                 </p>
               </div>
 
-              <div className="bg-[#ffcddf] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
+              <div className="bg-[#ffcddf] w-40 h-16 mt-10 px-6 rounded-lg flex flex-col items-center justify-center">
                 <span className="text-sm">Yr. of Experience</span>
                 <p className="text-lg font-semibold text-gray-700">
                   {job?.experience}
@@ -216,7 +219,7 @@ const JobDetail = () => {
         <div className="w-full md:w-1/3 2xl:w-2/4 p-5 mt-20 md:mt-0">
           <p className="text-gray-500 font-semibold">Similar Job Post</p>
 
-          <div className="w-full flex flex-wrap gap-4">
+          <div className="w-full flex flex-wrap gap-6 mt-6">
             {similarJobs?.slice(0, 6).map((job, index) => {
               const data = {
                 name: job?.company.name,
