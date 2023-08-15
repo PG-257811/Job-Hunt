@@ -77,7 +77,7 @@ const Companies = () => {
       <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 px-8 py-6">
         <div className="flex items-center justify-between mb-4 px-8">
           <p className="text-sm md:text-base">
-            <span className="font-semibold">{recordsCount}</span> Companies
+            Showing: <span className='font-semibold'>{recordCount}</span> Companies
             Available
           </p>
 
