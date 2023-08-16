@@ -13,6 +13,7 @@ export const createJob = async (req, res, next) => {
       experience,
       desc,
       requirements,
+      url
     } = req.body;
 
     if (
@@ -28,6 +29,7 @@ export const createJob = async (req, res, next) => {
     }
 
     const id = req.body.user.userId;
+    const pic = url;
 
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send(`No Company with id: ${id}`);
@@ -40,7 +42,8 @@ export const createJob = async (req, res, next) => {
       vacancies,
       experience,
       detail: { desc, requirements },
-      company: id,
+      company: id, 
+      logo: pic
     };
 
     const job = new Jobs(jobPost);
@@ -245,6 +248,53 @@ export const getJobById = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });
+  }
+};
+
+const findJobById = async (jobId) => {
+  try {
+    const job = await Jobs.findById(jobId);
+    return job;
+  } catch (error) {
+    console.error("Error finding job by ID:", error);
+    return null;
+  }
+};
+
+const saveJob = async (job) => {
+  try {
+    await job.save();
+  } catch (error) {
+    console.error("Error saving job:", error);
+  }
+};
+
+export const applyJob = async (req, res, next) => {
+  const { jobId, userId } = req.body;
+
+  console.log(req.body);
+
+  try {
+    // Find the job by ID and update the application array and applicant count
+    const job = await findJobById(jobId); // Implement this function to find the job by ID
+
+    if (job) {
+      if (!job.application.includes(userId)) {
+        console.log(userId);
+        job.application.push(userId);
+        
+        // Save the updated job details
+        await saveJob(job); // Implement this function to save the updated job
+        res.json({ success: true, message: "Applied for the job successfully." });
+      } else {
+        res.status(400).json({ success: false, message: "Already applied." });
+      }
+    } else {
+      res.status(404).json({ success: false, message: "Job not found." });
+    }
+  } catch (error) {
+    console.error("Error applying for job:", error);
+    res.status(500).json({ success: false, message: "An error occurred." });
   }
 };
 

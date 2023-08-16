@@ -19,6 +19,8 @@ const JobDetail = () => {
   const [selected, setSelected] = useState("0");
   const [isFetching, setIsFetching] = useState(false);
 
+  const [userApplied, setUserApplied] = useState(false);
+
   const getJobDetails = async () => {
     setIsFetching(true);
 
@@ -60,6 +62,38 @@ const JobDetail = () => {
       console.log(error);
     }
   };
+
+  const handleApply = async () => {
+    setIsFetching(true);
+  
+    console.log(user);
+
+    try {
+      const res = await apiRequest({
+        url: "/jobs/apply-job",
+        token: user?.token,
+        method: "POST",
+        data: { jobId: job?._id, userId: user?._id },
+      });
+  
+      if (res?.success) {
+        alert("Successfully applied for the job.");
+        // Refresh job details to reflect the updated applicant count
+        getJobDetails();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  
+    setIsFetching(false);
+  };
+
+  
+  useEffect(() => {
+    if (user && job) {
+      setUserApplied(job.application.includes(user._id));
+    }
+  }, [user, job]);
 
   useEffect(() => {
     id && getJobDetails();
@@ -206,12 +240,22 @@ const JobDetail = () => {
                   containerStyles={`w-full flex items-center justify-center text-white bg-red-700 py-3 px-5 outline-none rounded-full text-base`}
                 />
               ) : (
-                <CustomButton
-                  title="Apply Now"
-                  containerStyles={`w-full flex items-center justify-center text-white bg-black py-3 px-5 outline-none rounded-full text-base`}
-                />
+                // Conditionally rendering based on userApplied state
+                userApplied ? (
+                  <CustomButton
+                    title="You have Already applied for this Job"
+                    containerStyles={`w-full flex items-center justify-center text-white bg-green-400 py-3 px-5 outline-none rounded-full text-base`}
+                  />
+                ) : (
+                  <CustomButton
+                    title="Apply Now"
+                    onClick={handleApply}
+                    containerStyles={`w-full flex items-center justify-center text-white bg-black py-3 px-5 outline-none rounded-full text-base`}
+                  />
+                )
               )}
             </div>
+
           </div>
         )}
 

@@ -33,7 +33,14 @@ const UploadJob = () => {
     setIsLoading(true);
     setErrMsg(null);
 
-    const newData = { ...data, jobType: jobType };
+    const id = user?._id;
+
+    const res = await apiRequest({
+      url: "/companies/get-company/" + id,
+      method: "GET",
+    });
+
+    const newData = { ...data, jobType: jobType, url: res?.data?.profileUrl };
 
     try {
       const res = await apiRequest({

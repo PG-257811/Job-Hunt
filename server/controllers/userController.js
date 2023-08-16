@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Users from "../models/userModel.js";
+import Jobs from "../models/jobsModel.js"
 
 export const updateUser = async (req, res, next) => {
   const {
@@ -80,5 +81,23 @@ export const getUser = async (req, res, next) => {
       success: false,
       error: error.message,
     });
+  }
+};
+
+export const getAppliedJobs = async (req, res, next) => {
+  try {
+    const userId = req.body.user.userId;
+
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const appliedJobs = await Jobs.find({ application: userId });
+    
+    res.json({ success: true, data: appliedJobs });
+  } catch (error) {
+    console.error("Error fetching applied jobs:", error);
+    res.status(500).json({ success: false, message: "An error occurred" });
   }
 };
