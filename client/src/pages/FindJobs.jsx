@@ -82,8 +82,7 @@ const FindJobs = () => {
   const handleShowMore = async (increment) => {
     if (page + increment > 0 && page + increment <= numPage) {
       setPage((prevPage) => prevPage + increment);
-      setIsFetching(true); // Assuming you're using this state to manage fetching
-      // Perform your data fetching here
+      setIsFetching(true);
     }
   };
 
@@ -191,6 +190,12 @@ const FindJobs = () => {
             </div>
           </div>
 
+          {isFetching && (
+            <div className="py-10">
+              <Loading/>
+            </div>
+          )}
+          
           <div className='w-full flex flex-wrap gap-6 mt-10'>
             {data?.map((job, index) => {
               const newJob = {
@@ -203,11 +208,6 @@ const FindJobs = () => {
             )})}
           </div>
           
-          {isFetching && (
-            <div className="py-10">
-              <Loading/>
-            </div>
-          )}
 
           {/* Pagination */}
           <div className="w-full flex items-center justify-center gap-8">

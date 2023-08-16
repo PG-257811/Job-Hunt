@@ -53,8 +53,7 @@ const Companies = () => {
   const handleShowMore = (increment) => {
     if (page + increment > 0 && page + increment <= numPage) {
       setPage((prevPage) => prevPage + increment);
-      setIsFetching(true); // Assuming you're using this state to manage fetching
-      // Perform your data fetching here
+      setIsFetching(true);
     }
   };
 
