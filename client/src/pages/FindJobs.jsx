@@ -98,6 +98,8 @@ const FindJobs = () => {
       newExpVal?.sort((a, b) => a - b);
       
       setFilterExp(`${newExpVal[0]}-${newExpVal[newExpVal?.length - 1]}`)
+    }else{
+      setFilterExp([]);
     }
   }, [expVal]);
 
