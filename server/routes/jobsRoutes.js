@@ -6,6 +6,7 @@ import {
   deleteJobPost,
   getJobById,
   getJobPosts,
+  revokeApplication,
   updateJob,
 } from "../controllers/jobController.js";
 
@@ -17,7 +18,10 @@ router.post("/upload-job", userAuth, createJob);
 // Handle Job applications
 router.post("/apply-job", applyJob);
 
-// IPDATE JOB
+// Handle revoking application
+router.post("/revoke-application", revokeApplication);
+
+// UPDATE JOB
 router.put("/update-job/:jobId", userAuth, updateJob);
 
 // GET JOB POST

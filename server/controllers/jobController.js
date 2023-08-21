@@ -272,8 +272,6 @@ const saveJob = async (job) => {
 export const applyJob = async (req, res, next) => {
   const { jobId, userId } = req.body;
 
-  console.log(req.body);
-
   try {
     // Find the job by ID and update the application array and applicant count
     const job = await findJobById(jobId); // Implement this function to find the job by ID
@@ -295,6 +293,38 @@ export const applyJob = async (req, res, next) => {
   } catch (error) {
     console.error("Error applying for job:", error);
     res.status(500).json({ success: false, message: "An error occurred." });
+  }
+};
+
+export const revokeApplication = async (req, res, next) => {
+  const { jobId, userId } = req.body;
+
+  try {
+    const job = await Jobs.findById(jobId);
+
+    if (!job) {
+      return res.status(404).json({ success: false, message: 'Job not found.' });
+    }
+
+    // Convert the userId to a valid ObjectId
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+
+    // Check if the user has applied
+    const applicantIndex = job.application.findIndex(applicantId =>
+      applicantId.equals(userObjectId)
+    );
+
+    if (applicantIndex !== -1) {
+      job.application.splice(applicantIndex, 1);
+      await job.save();
+      
+      return res.json({ success: true, message: 'Application revoked successfully.' });
+    } else {
+      return res.status(400).json({ success: false, message: 'Application not found.' });
+    }
+  } catch (error) {
+    console.error('Error revoking application:', error);
+    res.status(500).json({ success: false, message: 'An error occurred.' });
   }
 };
 

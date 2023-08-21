@@ -88,7 +88,32 @@ const JobDetail = () => {
     setIsFetching(false);
   };
 
-  
+  const handleRevoke = async () => {
+    setIsFetching(true);
+
+    try {
+      if (window.confirm("Are you sure, Revoke Application?")) {
+        const res = await apiRequest({
+          url: "/jobs/revoke-application",
+          token: user?.token,
+          method: "POST",
+          data: { jobId: job?._id, userId: user?._id },
+        });
+
+        if (res?.success) {
+          alert("Application revoked successfully.");
+          // Refresh job details to reflect the updated applicant count
+          getJobDetails();
+        }
+      }
+
+      setIsFetching(false);
+    } catch (error) {
+      setIsFetching(false);
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (user && job) {
       setUserApplied(job.application.includes(user._id));
@@ -243,14 +268,15 @@ const JobDetail = () => {
                 // Conditionally rendering based on userApplied state
                 userApplied ? (
                   <CustomButton
-                    title="You have Already applied for this Job"
-                    containerStyles={`w-full flex items-center justify-center text-white bg-green-400 py-3 px-5 outline-none rounded-full text-base`}
+                    title="Revoke Now"
+                    onClick={handleRevoke}
+                    containerStyles={`w-full flex items-center justify-center text-white bg-red-400 py-3 px-5 outline-none rounded-full text-base`}
                   />
                 ) : (
                   <CustomButton
                     title="Apply Now"
                     onClick={handleApply}
-                    containerStyles={`w-full flex items-center justify-center text-white bg-black py-3 px-5 outline-none rounded-full text-base`}
+                    containerStyles={`w-full flex items-center justify-center text-white bg-green-400 py-3 px-5 outline-none rounded-full text-base`}
                   />
                 )
               )}
