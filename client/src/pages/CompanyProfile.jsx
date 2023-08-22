@@ -10,6 +10,7 @@ import { companies, jobs } from "../utils/data";
 import { CustomButton, JobCard, Loading, TextInput } from "../components";
 import { apiRequest, handleFileUpload } from "../utils";
 import { Login } from "../redux/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
 
 const CompnayForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
@@ -59,6 +60,8 @@ const CompnayForm = ({ open, setOpen }) => {
         setTimeout(() => {
           window.location.reload();
         }, 1500);
+
+        toast.success('Company profile updated')
       }
     } catch (error) {
       console.log(error);
@@ -83,6 +86,8 @@ const CompnayForm = ({ open, setOpen }) => {
           >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
+
+          <Toaster position="top-center"/>
 
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -253,6 +258,7 @@ const CompanyProfile = () => {
           {user?.user?.accountType === undefined && info?._id === user?._id && (
             <div className="flex items-center justifu-center py-5 md:py-0 gap-4">
               <CustomButton
+                title="Edit"
                 onClick={() => setOpenForm(true)}
                 iconRight={<FiEdit3 />}
                 containerStyles={`py-1.5 px-3 md:px-5 focus:outline-none bg-blue-600  hover:bg-blue-700 text-white rounded text-sm md:text-base border border-blue-600`}

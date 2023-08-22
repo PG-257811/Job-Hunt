@@ -9,6 +9,7 @@ import { CustomButton, Loading, TextInput } from "../components";
 import { NoProfile } from "../assets";
 import { apiRequest, handleFileUpload } from "../utils";
 import { Login } from "../redux/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
@@ -51,6 +52,8 @@ const UserForm = ({ open, setOpen }) => {
         setTimeout(() => {
           window.location.reload();
         }, 1500);
+
+        toast.success('User profile updated')
       }
 
     } catch (error) {
@@ -77,6 +80,8 @@ const UserForm = ({ open, setOpen }) => {
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
+          <Toaster position="top-center"/>
+          
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
