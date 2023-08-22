@@ -281,6 +281,9 @@ export const applyJob = async (req, res, next) => {
         console.log(userId);
         job.application.push(userId);
         
+        // decrementing vaccanices when applicants apply for a job
+        job.vacancies -= 1; 
+
         // Save the updated job details
         await saveJob(job); // Implement this function to save the updated job
         res.json({ success: true, message: "Applied for the job successfully." });
@@ -316,6 +319,10 @@ export const revokeApplication = async (req, res, next) => {
 
     if (applicantIndex !== -1) {
       job.application.splice(applicantIndex, 1);
+
+      // incrementing vaccanices when applicants apply for a job
+      job.vacancies += 1; 
+
       await job.save();
       
       return res.json({ success: true, message: 'Application revoked successfully.' });
