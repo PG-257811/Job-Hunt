@@ -47,7 +47,7 @@ const JobDetail = () => {
         const res = await apiRequest({
           url: "/jobs/delete-job/" + job?._id,
           token: user?.token,
-          method: "DELETE"
+          method: "DELETE",
         });
 
         if (res?.success) {
@@ -65,7 +65,7 @@ const JobDetail = () => {
 
   const handleApply = async () => {
     setIsFetching(true);
-  
+
     console.log(user);
 
     try {
@@ -75,7 +75,7 @@ const JobDetail = () => {
         method: "POST",
         data: { jobId: job?._id, userId: user?._id },
       });
-  
+
       if (res?.success) {
         alert("Successfully applied for the job.");
         // Refresh job details to reflect the updated applicant count
@@ -84,7 +84,7 @@ const JobDetail = () => {
     } catch (error) {
       console.log(error);
     }
-  
+
     setIsFetching(false);
   };
 
@@ -112,7 +112,7 @@ const JobDetail = () => {
       setIsFetching(false);
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     if (user && job) {
@@ -129,13 +129,13 @@ const JobDetail = () => {
     <div className="container mx-auto">
       <div className="w-full flex flex-col md:flex-row gap-10">
         {/* LEFT SIDE */}
-        
+
         {isFetching ? (
           <div className="mx-auto py-8">
-            <Loading/>
+            <Loading />
           </div>
         ) : (
-          <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white mt-6 ml-6 px-5 py-10 md:px-10 shadow-md  border-gray-300 border rounded-lg">
+          <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white mt-6 ml-6 mb-20 px-5 py-10 md:px-10 shadow-md  border-gray-300 border rounded-lg">
             <div className="w-full flex items-center justify-between">
               <div className="w-3/4 flex gap-2">
                 <img
@@ -181,7 +181,7 @@ const JobDetail = () => {
                 </p>
               </div>
 
-              <div className="bg-[#fed0ab] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
+              <div className="bg-[#fed0ab] w-50 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
                 <span className="text-sm">No. of Applicants</span>
                 <p className="text-lg font-semibold text-gray-700">
                   {job?.application?.length}
@@ -265,8 +265,9 @@ const JobDetail = () => {
                   containerStyles={`w-full flex items-center justify-center text-white bg-red-700 py-3 px-5 outline-none rounded-full text-base`}
                 />
               ) : (
-                // Conditionally rendering based on userApplied state
-                userApplied ? (
+                user?.accountType == "seeker" &&
+                // Conditionally rendering based on userApplied state & account type should be seeker
+                (userApplied ? (
                   <CustomButton
                     title="Revoke Now"
                     onClick={handleRevoke}
@@ -278,10 +279,9 @@ const JobDetail = () => {
                     onClick={handleApply}
                     containerStyles={`w-full flex items-center justify-center text-white bg-green-400 py-3 px-5 outline-none rounded-full text-base`}
                   />
-                )
+                ))
               )}
             </div>
-
           </div>
         )}
 
