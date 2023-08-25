@@ -55,7 +55,7 @@ const UploadJob = () => {
       } else {
         setErrMsg({ status: "success", message: res.messag });
         setTimeout(() => {
-          window.location.reload();
+          window.location.assign('/company-profile');
         }, 2000);
       }
       setIsLoading(false);

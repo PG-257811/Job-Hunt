@@ -248,7 +248,7 @@ const CompanyProfile = () => {
   }
 
   return (
-    <div className="container mx-auto p-5">
+    <div className="container mx-auto p-5 mb-20">
       <div className="">
         <div className="w-full flex flex-col md:flex-row gap-3 justify-between">
           <h2 className="text-gray-600 text-xl font-semibold">
@@ -296,7 +296,7 @@ const CompanyProfile = () => {
       <div className="w-full mt-20 flex flex-col gap-2">
         <p>Jobs Posted</p>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-8">
           {info?.jobPosts?.map((job, index) => {
             const data = {
               name: info?.name,
