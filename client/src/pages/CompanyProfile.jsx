@@ -55,7 +55,7 @@ const CompnayForm = ({ open, setOpen }) => {
         setErrMsg({ status: "success", message: res.message });
         const newData = { token: res?.token, ...res?.user };
         dispatch(Login(newData));
-        localStorage.setItem("userInfo", JSON.stringify(data));
+        localStorage.setItem("userInfo", JSON.stringify(newData));
 
         setTimeout(() => {
           window.location.reload();
@@ -256,7 +256,7 @@ const CompanyProfile = () => {
           </h2>
 
           {user?.user?.accountType === undefined && info?._id === user?._id && (
-            <div className="flex items-center justifu-center py-5 md:py-0 gap-4">
+            <div className="flex items-center justify-center py-5 md:py-0 gap-4">
               <CustomButton
                 title="Edit"
                 onClick={() => setOpenForm(true)}
